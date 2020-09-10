@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.ristar.movies.mvvm.R
+import com.ristar.movies.mvvm.data.api.models.Movie
 import kotlinx.android.synthetic.main.fragment_movies_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,15 +27,25 @@ class MoviesListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        moviesListAdapter = MoviesListAdapter()
+        moviesListAdapter = MoviesListAdapter(::movieClicked)
         recyclerView.adapter = moviesListAdapter
 
-        moviesListVM.viewStateLD.observe(viewLifecycleOwner, Observer {
-            Log.d(javaClass.simpleName, "data: ${it.data}")
-            progressBar.visibility = if (it.progressVisible) View.VISIBLE else View.GONE
-            moviesListAdapter.submitList(it.data)
-        })
+        // moviesListVM.viewStateLD.observe(viewLifecycleOwner, Observer {
+        //     Log.d(javaClass.simpleName, "data: ${it.data}")
+        //     progressBar.visibility = if (it.progressVisible) View.VISIBLE else View.GONE
+        // })
 
-        moviesListVM.loadMovies()
+        moviesListVM.movies.observe(viewLifecycleOwner, Observer {
+            Log.d(javaClass.simpleName, "moviesListVM: ${it.size}")
+            moviesListAdapter.submitList(it)
+        })
+    }
+
+    private fun movieClicked(movie: Movie) {
+        findNavController().navigate(
+            MoviesListFragmentDirections.actionMoviesListFragmentToMovieFragment(
+                movie
+            )
+        )
     }
 }

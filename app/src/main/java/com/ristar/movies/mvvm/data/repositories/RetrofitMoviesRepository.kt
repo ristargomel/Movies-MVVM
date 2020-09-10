@@ -8,14 +8,10 @@ class RetrofitMoviesRepository(
     private val apiKeyRepository: ApiKeyRepository
 ) : MoviesRepository {
 
-    override suspend fun getMovies(): List<Movie>? {
+    override suspend fun getMovies(page: Int): List<Movie>? {
         return moviesApi.getPopularMoviesList(
             apiKey = apiKeyRepository.getApiKey(),
-            page = PAGE_INDEX
+            page = page
         ).movieList
-    }
-
-    companion object {
-        const val PAGE_INDEX = 1
     }
 }

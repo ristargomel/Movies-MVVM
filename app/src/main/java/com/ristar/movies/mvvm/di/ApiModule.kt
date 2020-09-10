@@ -3,7 +3,6 @@ package com.ristar.movies.mvvm.di
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.ristar.movies.mvvm.BuildConfig
 import com.ristar.movies.mvvm.data.api.MoviesApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,7 +13,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 val apiModule: Module = module {
-
 
     //Provides Http Client
     single {

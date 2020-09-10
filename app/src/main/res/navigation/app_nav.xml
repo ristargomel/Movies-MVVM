@@ -9,6 +9,21 @@
         android:id="@+id/moviesListFragment"
         android:name="com.ristar.movies.mvvm.ui.MoviesListFragment"
         android:label="fragment_movies_list"
-        tools:layout="@layout/fragment_movies_list" />
+        tools:layout="@layout/fragment_movies_list" >
+        <action
+            android:id="@+id/action_moviesListFragment_to_movieFragment"
+            app:destination="@id/movieFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.ristar.movies.mvvm.ui.MovieFragment"
+        android:label="fragment_movie"
+        tools:layout="@layout/fragment_movie">
+        <argument
+            android:name="movie"
+            app:argType="com.ristar.movies.mvvm.data.api.models.Movie"
+            app:nullable="false" />
+    </fragment>
 
 </navigation>

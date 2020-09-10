@@ -4,6 +4,6 @@ import com.ristar.movies.mvvm.data.api.models.Movie
 
 interface MoviesRepository {
 
-    suspend fun getMovies(): List<Movie>?
+    suspend fun getMovies(page: Int): List<Movie>?
 
 }
